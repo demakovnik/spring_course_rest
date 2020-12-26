@@ -1,12 +1,9 @@
 package com.inofttech.spring.rest.controller;
 
 import com.inofttech.spring.rest.entity.Employee;
-import com.inofttech.spring.rest.exception_handling.EmployeeIncorrectData;
 import com.inofttech.spring.rest.exception_handling.NoSuchEmployeeException;
 import com.inofttech.spring.rest.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,6 +43,12 @@ public class MyRestController {
     public Employee updateEmployee(@RequestBody Employee employee) {
         employeeService.saveEmployee(employee);
         return employee;
+    }
+
+    @DeleteMapping("/employees/{id}")
+    public String deleteEmployee(@PathVariable int id) {
+        employeeService.deleteEmployeeById(id);
+        return "Employee with ID=" + id + " was deleted";
     }
 
 }
